@@ -1,5 +1,6 @@
 import static org.testng.Assert.assertEquals;
 
+import java.io.File;
 import java.net.Authenticator.RequestorType;
 
 import org.junit.Test;
@@ -10,7 +11,12 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
 public class JavaProgram1 {
-
+	@Test
+	public void testmethod() {
+		
+	postRequest("https://reqres.in/", "/api/users", "UserPostRequestBody2");
+	
+	}
 	public void getRequest() {
 	
 		//step1 Request-Method,resources url,parameters,body,headers,authorization
@@ -44,23 +50,21 @@ public class JavaProgram1 {
 				.extract().response();//method chaining 
 		System.out.println(response.getBody().asPrettyString());
 	}
-	//@Test
-	public void postRequest() {
-		RestAssured.baseURI="https://reqres.in/";//it is a property
+	
+	public void postRequest(String baseUrl,String endpoint,String requestfile) {
+		File jsonRequest=new File("C:\\Users\\Dell\\eclipse-workspace\\ApiAutomation\\src\\test\\resources\\RequestJson\\"+requestfile+".json");
+		RestAssured.baseURI=baseUrl;//it is a property
 		//RequestSpecification request= RestAssured
 		Response response= RestAssured
 				.given()//only for readablity
-				.body("{\r\n"
-						+ "    \"name\": \"morpheus\",\r\n"
-						+ "    \"job\": \"zion resident\"\r\n"
-						+ "}")
+				.body(jsonRequest)
 				.when()//we will say what method 
-				.post("/api/users")
+				.post(endpoint)
 				.then()
 				.extract().response();//method chaining 
 		System.out.println(response.getBody().asPrettyString());
 	}
-	@Test
+	//@Test
 	public void deleteRequest() {
 		RestAssured.baseURI="https://reqres.in/";//it is a property
 		//RequestSpecification request= RestAssured
