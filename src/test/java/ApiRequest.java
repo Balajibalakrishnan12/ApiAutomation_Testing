@@ -10,7 +10,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
-public class JavaProgram1 {
+public class ApiRequest {
 	@Test
 	public void testmethod() {
 		
@@ -34,7 +34,7 @@ public class JavaProgram1 {
 		//Step2 Response-Status code,Response payload(body),Response headers(transaction id will be check if required)
 
 	}
-	//@Test
+	
 	public void putRequest() {
 		RestAssured.baseURI="https://reqres.in/";//it is a property
 		//RequestSpecification request= RestAssured
@@ -64,7 +64,7 @@ public class JavaProgram1 {
 				.extract().response();//method chaining 
 		System.out.println(response.getBody().asPrettyString());
 	}
-	//@Test
+	
 	public void deleteRequest() {
 		RestAssured.baseURI="https://reqres.in/";//it is a property
 		//RequestSpecification request= RestAssured
