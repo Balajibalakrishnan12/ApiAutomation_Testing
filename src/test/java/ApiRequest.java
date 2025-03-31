@@ -11,11 +11,17 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
 public class ApiRequest {
-	@Test
-	public void testmethod() {
+	//@Test
+	public void testmethodPost() {
 		
 	postRequest("https://reqres.in/", "/api/users", "UserPostRequestBody2");
 	
+	}
+	@Test
+	public void testmethodPut() {
+		
+		putRequest("https://reqres.in/","/api/users/2","UserPutRequest");
+
 	}
 	public void getRequest() {
 	
@@ -35,17 +41,30 @@ public class ApiRequest {
 
 	}
 	
-	public void putRequest() {
-		RestAssured.baseURI="https://reqres.in/";//it is a property
+//	public void putRequest() {
+//		RestAssured.baseURI="https://reqres.in/";//it is a property
+//		//RequestSpecification request= RestAssured
+//		Response response= RestAssured
+//				.given()//only for readablity
+//				.body("{\r\n"
+//						+ "    \"name\": \"morpheus\",\r\n"
+//						+ "    \"job\": \"zion resident\"\r\n"
+//						+ "}")
+//				.when()//we will say what method 
+//				.put("/api/users/2")
+//				.then()
+//				.extract().response();//method chaining 
+//		System.out.println(response.getBody().asPrettyString());
+//	}
+	public void putRequest(String baseURl,String endPoint1,String requestFile1) {
+		File jsonRequest1=new File("C:\\Users\\Dell\\eclipse-workspace\\ApiAutomation\\src\\test\\resources\\RequestJson\\"+requestFile1+".json");
+		RestAssured.baseURI=baseURl;//it is a property
 		//RequestSpecification request= RestAssured
 		Response response= RestAssured
 				.given()//only for readablity
-				.body("{\r\n"
-						+ "    \"name\": \"morpheus\",\r\n"
-						+ "    \"job\": \"zion resident\"\r\n"
-						+ "}")
+				.body(jsonRequest1)
 				.when()//we will say what method 
-				.put("/api/users/2")
+				.put(endPoint1)
 				.then()
 				.extract().response();//method chaining 
 		System.out.println(response.getBody().asPrettyString());
