@@ -1,3 +1,4 @@
+package automation;
 import static org.testng.Assert.assertEquals;
 
 import java.io.File;
